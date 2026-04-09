@@ -1,0 +1,91 @@
+// Version: 1.0.0
+type CartItem__933594202 =
+  {price : Float; productId : ProductId__160010635; quantity : Nat};
+type Cart__819311300 =
+  {
+    items : [CartItem__933594202];
+    updatedAt : Timestamp__301639476;
+    userId : UserId__158757552
+  };
+type Data__791452850<K, V> =
+  {var count : Nat__490723111; kvs : [var ?(K, V)]};
+type Internal__8484328<K, V> =
+  {children : [var ?Node__46230540<K, V>]; data : Data__791452850<K, V>};
+type Leaf__809889148<K, V> = {data : Data__791452850<K, V>};
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+type Node__46230540<K, V> =
+  {#internal : Internal__8484328<K, V>; #leaf : Leaf__809889148<K, V>};
+type OrderId__197865225 = Text;
+type Order__353553348 =
+  {
+    createdAt : Timestamp__301639476;
+    id : OrderId__197865225;
+    items : [CartItem__933594202];
+    shippingAddress : Text;
+    status : Text;
+    total : Float;
+    userId : UserId__158757552
+  };
+type ProductId__160010635 = Text;
+type Product__782792486 =
+  {
+    brand : Text;
+    category : Text;
+    description : Text;
+    id : ProductId__160010635;
+    imageUrl : Text;
+    images : [Text];
+    inStock : Bool;
+    isFeatured : Bool;
+    isTrending : Bool;
+    name : Text;
+    originalPrice : Float;
+    price : Float;
+    rating : Float;
+    reviewCount : Nat;
+    specifications : [Spec__94682633]
+  };
+type ReviewId__496285678 = Text;
+type Review__896969627 =
+  {
+    authorName : Text;
+    body : Text;
+    createdAt : Timestamp__301639476;
+    helpful : Nat;
+    id : ReviewId__496285678;
+    productId : ProductId__160010635;
+    rating : Nat;
+    title : Text;
+    userId : UserId__158757552
+  };
+type Spec__94682633 = {key : Text; value : Text};
+type Timestamp__301639476 = Int;
+type UserId__158757552 = Text;
+actor {
+  stable carts :
+    {
+      var root : Node__46230540<UserId__158757552, Cart__819311300>;
+      var size : Nat__490723111
+    };
+  stable nextOrderId : {var val : Nat};
+  stable nextReviewId : {var val : Nat};
+  stable orders :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Order__353553348]];
+      var elementIndex : Nat__490723111
+    };
+  stable products :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Product__782792486]];
+      var elementIndex : Nat__490723111
+    };
+  stable reviews :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Review__896969627]];
+      var elementIndex : Nat__490723111
+    }
+};

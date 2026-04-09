@@ -1,0 +1,78 @@
+type UserId = text;
+type Timestamp = int;
+type Spec = 
+ record {
+   key: text;
+   value: text;
+ };
+type ReviewId = text;
+type Review = 
+ record {
+   authorName: text;
+   body: text;
+   createdAt: Timestamp;
+   helpful: nat;
+   id: ReviewId;
+   productId: ProductId;
+   rating: nat;
+   title: text;
+   userId: UserId;
+ };
+type ProductId = text;
+type Product = 
+ record {
+   brand: text;
+   category: text;
+   description: text;
+   id: ProductId;
+   imageUrl: text;
+   images: vec text;
+   inStock: bool;
+   isFeatured: bool;
+   isTrending: bool;
+   name: text;
+   originalPrice: float64;
+   price: float64;
+   rating: float64;
+   reviewCount: nat;
+   specifications: vec Spec;
+ };
+type OrderId = text;
+type Order = 
+ record {
+   createdAt: Timestamp;
+   id: OrderId;
+   items: vec CartItem;
+   shippingAddress: text;
+   status: text;
+   total: float64;
+   userId: UserId;
+ };
+type CartItem = 
+ record {
+   price: float64;
+   productId: ProductId;
+   quantity: nat;
+ };
+type Cart = 
+ record {
+   items: vec CartItem;
+   updatedAt: Timestamp;
+   userId: UserId;
+ };
+service : {
+  addReview: (productId: text, userId: text, authorName: text, rating: 
+   nat, title: text, body: text) -> (Review);
+  addToCart: (userId: text, productId: text, quantity: nat) -> (Cart);
+  clearCart: (userId: text) -> ();
+  getCart: (userId: text) -> (opt Cart) query;
+  getOrder: (id: text) -> (opt Order) query;
+  getOrders: (userId: text) -> (vec Order) query;
+  getProduct: (id: text) -> (opt Product) query;
+  getProductReviews: (productId: text) -> (vec Review) query;
+  getProducts: (category: opt text, brand: opt text, minPrice: opt float64,
+   maxPrice: opt float64, minRating: opt float64, sortBy: opt text) ->
+   (vec Product) query;
+  placeOrder: (userId: text, shippingAddress: text) -> (Order);
+  removeFromCart: (userId: text, productId: text) -> (Cart);
+}

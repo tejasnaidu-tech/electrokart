@@ -1,0 +1,21 @@
+{
+  "overview": "A modern, responsive e-commerce platform for electronics — inspired by Amazon and Flipkart — with product browsing, filtering, cart, checkout, and user accounts.",
+  "features": [
+    "Homepage with hero banner, trending products, and category grid",
+    "Product listing with price, brand, and rating filters",
+    "Product detail page with image gallery, specs, and reviews",
+    "Shopping cart with quantity controls and totals",
+    "Stripe-powered checkout with order confirmation",
+    "User login via Internet Identity with protected routes",
+    "Order history and account management page"
+  ],
+  "category": "ecommerce",
+  "tags": [
+    "ecommerce",
+    "electronics",
+    "shopping",
+    "mobile-responsive",
+    "blue-white-theme"
+  ],
+  "last_updated": "2026-04-09T14:50:54.889Z"
+}
